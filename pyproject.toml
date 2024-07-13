@@ -8,7 +8,7 @@ version = "0.0.1"
 description = "A tool to analyze your expenditures."
 readme = { file = "README.md", content-type = "text/markdown" }
 requires-python = ">= 3.12"
-dependencies = []
+dependencies = ["xlrd==2.0.1"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
@@ -17,6 +17,9 @@ classifiers = [
     "Intended Audience :: Developers",
     "Natural Language :: English",
 ]
+authors = [{ name = "Juan Pablo Salado", email = "jpsalado92@gmail.com" }]
+[tool.setuptools.packages.find]
+include = ["expenditure_analyzer", "expenditure_analyzer.*"]
 [project.optional-dependencies]
 dev = [
     "ruff==0.5.1",
@@ -116,9 +119,9 @@ select = [ # CHECK EVERY RULE AT: https://docs.astral.sh/ruff/rules/#ruff-specif
     "TD",   # [flake8-todo] Checks for TODO comments.
     "TRY",  # [tryceratops] Rules for preventing Exception Handling AntiPatterns.
     "AIR",  # [airflow] Rules intended for airflow projects.
-    "COM",  # [flake8-commas] Checks related to comma usage. (In conflict with ruff format)
-    "CPY",  # [flake8-copyright] Checks for the presence of a copyright in files.
-    "D",    # [pydocstyle] Rules related to documenting stuff.
+    # "COM",  # [flake8-commas] Checks related to comma usage. (In conflict with ruff format)
+    # "CPY",  # [flake8-copyright] Checks for the presence of a copyright in files.
+    # "D",    # [pydocstyle] Rules related to documenting stuff.
     "DJ",   # [flake8-django] Rules intended for Django projects.
     "EM",   # [flake8-errmsg] Checks for error messages that could be improved.
     "ERA",  # [flake8-eradicate] Checks for commented out code.
@@ -127,19 +130,24 @@ select = [ # CHECK EVERY RULE AT: https://docs.astral.sh/ruff/rules/#ruff-specif
     "FBT",  # [flake8-boolean-trap] Checks for common boolean traps.
     "G",    # [flake8-logging-format] Validate (lack of) logging format strings.
     "INT",  # [flake8-gettext] Rules related to formatting of gettext calls.
-    "ISC",  # [flake8-implicit-str-concat] Checks for implicit string concatenation. (In conflict with ruff format)
-    "PGH",  # [pygrep-hooks] Rules for pygrep hooks.
+    # "ISC",  # [flake8-implicit-str-concat] Checks for implicit string concatenation. (In conflict with ruff format)
+    # "PGH",  # [pygrep-hooks] Rules for pygrep hooks.
     "PTH",  # [flake8-use-pathlib] rules to find use of functions that can be replaced by pathlib module.
     "PYI",  # [flake8-pyi] Checks for stub files.
 ]
 
+ignore = [
+    "T20" # [flake8-print] Checks for print/pprint statements.
+]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "__init__.py" = [
     "I001", # [unsorted-imports] De-duplicates, groups, and sorts imports based on the provided isort settings.
 ]
 "**/test*" = [
     "E501", # [pycodestyle] Checks for lines that exceed the specified maximum character length.
+    "S101",
+    "ANN201",
 ]
 
 "tools/*" = [
