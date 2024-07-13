@@ -1,0 +1,191 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ExpenditureAnalyzer"
+version = "0.0.1"
+description = "A tool to analyze your expenditures."
+readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">= 3.12"
+dependencies = []
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+]
+[project.optional-dependencies]
+dev = [
+    "ruff==0.5.1",
+    "pre-commit==3.7.1",
+    "uv==0.2.24",
+    "pytest==8.2.2",
+    "tox==4.16.0",
+    "pyright==1.1.371",
+    "mypy==1.10.1",
+]
+
+[tool.ruff]
+
+# A list of file patterns to exclude from formatting and linting.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pycache__",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "docs/source/conf.py",
+    "env",
+    "htmlcov",
+    "migrations",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+line-length = 100
+indent-width = 4
+required-version = "==0.5.1"
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [ # CHECK EVERY RULE AT: https://docs.astral.sh/ruff/rules/#ruff-specific-rules-ruf
+    "ANN",   # [flake8-annotations] Checks for detecting the absence of PEP 3107-style function annotations.
+    "ASYNC", # [flake8-async] Checks for common async pitfalls.
+    "C4",    # [flake8-comprehensions] Rules intended to write better list/set/dict comprehensions.
+    "B",     # [flake8-bugbear] Rules intended for finding likely bugs and design problems in the app.
+    "C",     # [convention] Rules for enforcing convention.
+    "C90",   # [mccabe] Checks for complexity issues.
+    "DTZ",   # [flake8-datetimez] Rules intended for banning the usage of unsafe naive datetime class.
+    "E",     # [pycodestyle] Rules that enforce some of the style conventions in PEP 8.
+    "F",     # [pyflakes] Rules intended for checking Python source files for errors.
+    "FLY",   # [flynt] Convert a project's Python code from old "%-formatted" and .format(...) strings into Python 3.6+'s "f-strings".
+    "I",     # [isort] Rules to check sorted and properly sectioned imports.
+    "ICN",   # [flake8-import-conventions] Rules related to how certain packages should be imported or aliased.
+    "INP",   # [flake8-no-pep420] Checks for packages that are missing an __init__.py file.
+    "LOG",   # [flake8-logging] Checks for logging related code.
+    "N",     # [pep8-naming] Rules to enforce PEP 8 naming conventions.
+    "NPY",   # [numpy] Rules related to proper numpy usage.
+    "PD",    # [pandas-vet] Rules for improving pandas code.
+    "PERF",  # [perflint] Checks for performance anti patterns.
+    "PIE",   # [flake8-pie] Rules that prevents the definition of unnecessary or confusing code.
+    "PT",    # [flake8-pytest-style] Checks for common pytest pitfalls.
+    "Q",     # [flake8-quotes] Rules related to string quotes.
+    "RET",   # [flake8-return] Flake8 plugin that checks return values.
+    "RSE",   # [flake8-raise]Rules for improving raise statements.
+    "RUF",   # [ruff] Every ruff specific rule.
+    "SIM",   # [flake8-simplify] Rules for simplifying code.
+    "SLOT",  # [flake8-slots] Require __slots__ to be defined for subclasses of immutable types.
+    "T10",   # [flake8-debugger] Checks for the presence of debugger calls and imports.
+    "T20",   # [flake8-print] Rules for avoiding the usage of Print statements in python files.
+    "TCH",   # [flake8-type-checking] Lets you know which imports to move in or out of type-checking blocks.
+    "TID",   # [flake8-tidy-imports] Enforcement of tidier imports.
+    "UP",    # [pyupgrade][non-pep585-annotation] Use {to} instead of {from} for type annotation.
+    "W",     # [pyflakes] Rules intended for checking Python source files for errors.
+    "YTT",   # [flake8-2020] Checks for misuse of sys.version or sys.version_info.
+
+    "A",    # [flake8-builtins] Checks for python builtins being used as variables or parameters.
+    "ARG",  # [flake8-unused-arguments] Checks for unused arguments in function definitions.
+    "BLE",  # [flake8-blind-except] Checks for blind except: statements.
+    "FURB", # [refurb] A tool for refurbishing and modernizing Python codebases.
+    "S",    # [flake8-bandit] Security checks using bandit.
+    "SLF",  # [flake8-self] Checks for accesses on "private" class members.
+    "PL",   # [pylint] Rules intended for checking Python source files for errors.
+    "FIX",  # [flake8-fixme] Checks for FIXME, TODO, XXX, and similar comments.
+    "TD",   # [flake8-todo] Checks for TODO comments.
+    "TRY",  # [tryceratops] Rules for preventing Exception Handling AntiPatterns.
+    "AIR",  # [airflow] Rules intended for airflow projects.
+    "COM",  # [flake8-commas] Checks related to comma usage. (In conflict with ruff format)
+    "CPY",  # [flake8-copyright] Checks for the presence of a copyright in files.
+    "D",    # [pydocstyle] Rules related to documenting stuff.
+    "DJ",   # [flake8-django] Rules intended for Django projects.
+    "EM",   # [flake8-errmsg] Checks for error messages that could be improved.
+    "ERA",  # [flake8-eradicate] Checks for commented out code.
+    "EXE",  # [flake8-executable] Rules intended for checking executable files.
+    "FA",   # [flake8-future-annotations] Checks related to future annotations.
+    "FBT",  # [flake8-boolean-trap] Checks for common boolean traps.
+    "G",    # [flake8-logging-format] Validate (lack of) logging format strings.
+    "INT",  # [flake8-gettext] Rules related to formatting of gettext calls.
+    "ISC",  # [flake8-implicit-str-concat] Checks for implicit string concatenation. (In conflict with ruff format)
+    "PGH",  # [pygrep-hooks] Rules for pygrep hooks.
+    "PTH",  # [flake8-use-pathlib] rules to find use of functions that can be replaced by pathlib module.
+    "PYI",  # [flake8-pyi] Checks for stub files.
+]
+
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = [
+    "I001", # [unsorted-imports] De-duplicates, groups, and sorts imports based on the provided isort settings.
+]
+"**/test*" = [
+    "E501", # [pycodestyle] Checks for lines that exceed the specified maximum character length.
+]
+
+"tools/*" = [
+    "T20", # [flake8-print] Checks for print/pprint statements.
+]
+
+
+[tool.ruff.format]
+exclude = ["*.pyi"]
+indent-style = "space"
+quote-style = "double"
+
+[tool.tox]
+legacy_tox_ini = """
+    [tox]
+    envlist =
+        ruff-lint
+        ruff-format
+        pyright
+        mypy
+        py312
+
+    [testenv]
+    deps =
+        -rrequirements-dev.txt
+    commands =
+        pytest
+
+    [testenv:ruff-lint]
+    deps = ruff==0.5.1
+    skip_install = true
+    commands = ruff check .
+
+    [testenv:ruff-format]
+    deps = ruff==0.5.1
+    skip_install = true
+    commands = ruff format . --check
+
+    [testenv:pyright]
+    deps = pyright==1.1.371
+    skip_install = true
+    commands = pyright
+
+    [testenv:mypy]
+    deps = mypy==1.10.1
+    skip_install = true
+    commands = mypy .
+
+"""
